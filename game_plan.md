@@ -1,4 +1,4 @@
-# To Do App Gameplan 
+# To Do App Game Plan 
 
 ## A `to-do-app` Element
 - Contains an array of To Do's as <strong>Property</strong>
