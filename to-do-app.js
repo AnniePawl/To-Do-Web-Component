@@ -51,18 +51,33 @@ class TodoApp extends HTMLElement {
     super()
     this._shadowRoot = this.attachShadow({ 'mode': 'open' })
     this._shadowRoot.appendChild(template.content.cloneNode(true))
-    this.$todoList = this._shadowRoot.querySelector('ul')
+
+    this.$todoList = this._shadowRoot.querySelector('ul');
+    this.$input = this._shadowRoot.querySelector('input');
+
+    this.$submitButton = this._shadowRoot.querySelector('button');
+    this.$submitButton.addEventListener('click', this._addToDo.bind(this));
+  }
+
+  _addToDo() {
+    if (this.$input.value.length > 0) {
+      this._todos.push({ text: this.$input.value, checked: false })
+      this._renderTodoList();
+      this.$input.value = ''
+    }
+
   }
 
   // Getters and Setters
+  // Render from to-do-item.js
   _renderTodoList() {
-    this.$todoList.innerHTML = ''
+    this.$todoList.innerHTML = '';
 
     this._todos.forEach((todo, index) => {
-      let $todoItem = document.createElement('div')
-      $todoItem.innerHTML = todo.text
-      this.$todoList.appendChild($todoItem)
-    })
+      let $todoItem = document.createElement('to-do-item');
+      $todoItem.setAttribute('text', todo.text);
+      this.$todoList.appendChild($todoItem);
+    });
   }
 
   set todos(value) {
@@ -76,9 +91,10 @@ class TodoApp extends HTMLElement {
 
 }
 
+// Define custom element
 window.customElements.define('to-do-app', TodoApp)
 
+
 document.querySelector('to-do-app').todos = [
-  { text: "Make a to-do list", checked: false },
-  { text: "Finish blog post", checked: false }
+
 ]
