@@ -1,20 +1,18 @@
+
 (function () {
   // Make a new Component
   // Choose an element to extend, usually HTMLElement
-  class RainbowText extends HTMLElement {
+  class BlinkText extends HTMLElement {
     constructor() {
       super(); // MUST call super!
       // Attach a shadow root to the element.
       this._shadowRoot = this.attachShadow({ mode: 'open' });
 
-      // const colors = ['rgb(255,0,0)', 'rgb(245, 161, 66)', 'rgb(255, 245, 56)', 'rgb(255, 245, 56)', 'rgb(56, 129, 255)', 'rgb(56, 129, 255)']
-
       const str = this.innerHTML
       const originalText = str.split('')
-      const newText = originalText.map((char, i, arr) => {
+      const newText = originalText.map((char, i) => {
         const span = document.createElement('span')
         span.innerHTML = char
-        span.style.color = `hsl(${360 / arr.length * i}, 100%, 50%)`
         this._shadowRoot.appendChild(span)
         return span
       })
@@ -40,7 +38,7 @@
     }
   }
 
-  customElements.define('rainbow-text', RainbowText);
+  customElements.define('blink-text', BlinkText);
   // ---------
 
 
