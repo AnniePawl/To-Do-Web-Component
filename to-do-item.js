@@ -2,10 +2,8 @@
 // Only set innerHTML on template *once*
 // Template used because cloning templates is aesier than calling .innerHTML for all instances of component
 const template = document.createElement('template');
-template.innerHTML =
-  // Add Styles to component from *inside* by using :host pseudo class so they are not overwritten by global style
-  `
-  <style>
+template.innerHTML = `
+<style>
     :host {
 	display: block;
 	font-family: sans-serif;
@@ -25,7 +23,8 @@ template.innerHTML =
     <label></label>
     <button>❌</button>
 </li>
-`
+`;
+
 class TodoItem extends HTMLElement {
   constructor() {
     super();
